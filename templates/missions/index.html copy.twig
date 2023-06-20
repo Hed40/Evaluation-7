@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Missions
+{% endblock %}
+
+{% block content %}
+	<h1>Missions</h1>
+	<a class="btn btn-primary" href="{{ path('app_missions_new') }}">Nouvelle mission</a>
+	<div class="missionsSection" id="missionsSection">
+		{% for mission in missions %}
+			<div class="form-container">
+				<div class="card-header">
+					<h5 class="card-title text-center">{{ mission.title }}</h5>
+				</div>
+				<div class="card-body mt-3">
+					<div class="row">
+						<div class="col-md-6">
+							<p class="card-text">
+								<strong>Titre :</strong>
+								{{ mission.title }}</p>
+							<p class="card-text">
+								<strong>Description :</strong>
+								{{ mission.description }}</p>
+							<p class="card-text">
+								<strong>Nom de code :</strong>
+								{{ mission.codeName }}</p>
+							<p class="card-text">
+								<strong>Pays :</strong>
+								{{ mission.country }}</p>
+							<p class="card-text">
+								<strong>Début :</strong>
+								{{ mission.startDate ? mission.startDate|date('D-m-y') : '' }}</p>
+							<p class="card-text">
+								<strong>Fin :</strong>
+								{{ mission.endDate ? mission.endDate|date('D-m-y') : '' }}</p>
+						</div>
+						<div class="col-md-6">
+							<p class="card-text">
+								<strong>Agents :</strong>
+								{% for agent in mission.agents %}
+									{{ agent.firstName }}
+									{{ agent.lastName }}
+									{% if not loop.last %},
+									{% endif %}
+								{% endfor %}
+							</p>
+							<p class="card-text">
+								<strong>Contacts :</strong>
+								{% for contact in mission.contacts %}
+									{{ contact.firstName }}
+									{% if not loop.last %},
+									{% endif %}
+								{% endfor %}
+							</p>
+							<p class="card-text 
+							{% if mission.status == 'En attente' %}status-pending
+							{% elseif mission.status == 'En cours' %} status-in-progress
+							{% elseif mission.status == 'Terminée' %} status-completed
+							{% elseif mission.status == 'Annulée' %} status-deleted
+							{% endif %}">
+								<strong>Status :</strong>
+								{{ mission.status }}</p>
+							<p class="card-text ">
+							
+								<strong>Spécialité requise :</strong>
+								{{ mission.requiredSpeciality }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer d-flex justify-content-center">
+					<a class="btn btn-primary m-2" href="{{ path('app_missions_show', {'id': mission.id}) }}">Voir</a>
+					<a class="btn btn-secondary m-2" href="{{ path('app_missions_edit', {'id': mission.id}) }}">Éditer</a>
+				</div>
+			</div>
+		{% else %}
+			<div class="alert alert-info" role="alert">
+				Aucune donnée n'a été trouvée.
+			</div>
+		{% endfor %}
+	</div>
+	<div class="missionsSection" id="missionsSection">
+	</div>
+{% endblock %}

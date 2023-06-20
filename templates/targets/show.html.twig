@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cible{% endblock %}
+
+{% block content %}
+    <h1>Cible</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ target.id }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ target.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ target.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ target.dateOfBirth ? target.dateOfBirth|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Nom de code</th>
+                <td>{{ target.codeName }}</td>
+            </tr>
+            <tr>
+                <th>Nationalité</th>
+                <td>{{ target.nationality }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn primary" href="{{ path('app_targets_index') }}">Retour</a>
+
+    <a class="btn btn primary" href="{{ path('app_targets_edit', {'id': target.id}) }}">Editer</a>
+
+    {{ include('targets/_delete_form.html.twig') }}
+{% endblock %}

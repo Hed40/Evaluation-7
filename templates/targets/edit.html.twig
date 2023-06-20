@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer la cicle{% endblock %}
+
+{% block content %}
+    <h1>Editer</h1>
+
+    {{ include('targets/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-primary" href="{{ path('app_targets_index') }}">Retour</a>
+
+    {{ include('targets/_delete_form.html.twig') }}
+{% endblock %}

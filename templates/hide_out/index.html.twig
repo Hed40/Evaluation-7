@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planques{% endblock %}
+
+{% block content %}
+    <h1>Planques</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Country</th>
+                <th>Type</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hide_out in hide_outs %}
+            <tr>
+                <td>{{ hide_out.id }}</td>
+                <td>{{ hide_out.code }}</td>
+                <td>{{ hide_out.country }}</td>
+                <td>{{ hide_out.type }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_hide_out_show', {'id': hide_out.id}) }}">voire</a>
+                    <a class="btn btn-primary" href="{{ path('app_hide_out_edit', {'id': hide_out.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune donnée n'a été trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
+{% endblock %}

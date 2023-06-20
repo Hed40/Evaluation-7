@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle planque{% endblock %}
+
+{% block content %}
+    <h1>Créer une plaque</h1>
+
+    {{ include('hide_out/_form.html.twig') }}
+
+    <a class="btn btn-primary" href="{{ path('app_hide_out_index') }}">retour à la liste</a>
+{% endblock %}

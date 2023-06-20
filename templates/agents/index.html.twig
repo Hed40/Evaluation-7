@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agents index{% endblock %}
+
+{% block content %}
+    <h1>Agents index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>DateOfBirth</th>
+                <th>IdentificationCode</th>
+                <th>Nationality</th>
+                <th>Specialties</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for agents in agent %}
+            <tr>
+                <td>{{ agents.id }}</td>
+                <td>{{ agents.firstName }}</td>
+                <td>{{ agents.lastName }}</td>
+                <td>{{ agents.dateOfBirth ? agents.dateOfBirth|date('Y-m-d') : '' }}</td>
+                <td>{{ agents.identificationCode }}</td>
+                <td>{{ agents.nationality }}</td>
+                <td>{{ agents.specialties }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_agents_show', {'id': agents.id}) }}">voire</a>
+                    <a class="btn btn-primary" href="{{ path('app_agents_edit', {'id': agents.id}) }}">éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune donnée n'a été trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('app_agents_new') }}">Ajouter un Agent</a>
+{% endblock %}

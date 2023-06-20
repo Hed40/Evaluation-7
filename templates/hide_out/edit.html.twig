@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planques{% endblock %}
+
+{% block content %}
+    <h1>Modifier une planque</h1>
+
+    {{ include('hide_out/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_hide_out_index') }}">retour à la liste</a>
+
+    {{ include('hide_out/_delete_form.html.twig') }}
+{% endblock %}
