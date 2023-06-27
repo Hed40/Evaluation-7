@@ -1,45 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Agents index{% endblock %}
+{% block title %}Agents{% endblock %}
 
 {% block content %}
-    <h1>Agents index</h1>
+    <h1>Agents</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>DateOfBirth</th>
-                <th>IdentificationCode</th>
-                <th>Nationality</th>
-                <th>Specialties</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for agents in agent %}
-            <tr>
-                <td>{{ agents.id }}</td>
-                <td>{{ agents.firstName }}</td>
-                <td>{{ agents.lastName }}</td>
-                <td>{{ agents.dateOfBirth ? agents.dateOfBirth|date('Y-m-d') : '' }}</td>
-                <td>{{ agents.identificationCode }}</td>
-                <td>{{ agents.nationality }}</td>
-                <td>{{ agents.specialties }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('app_agents_show', {'id': agents.id}) }}">voire</a>
-                    <a class="btn btn-primary" href="{{ path('app_agents_edit', {'id': agents.id}) }}">éditer</a>
-                </td>
-            </tr>
+    <div class="missionsSection" id="missionsSection">
+        {% for agent in agent %}
+            <div class="form-container">
+                <div class="card-header">
+                    <h5 class="card-title text-center">{{ agent.firstName }} {{ agent.lastName }}</h5>
+                </div>
+                <div class="card-body mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="card-text"><strong>Prénom :</strong> {{ agent.firstName }}</p>
+                            <p class="card-text"><strong>Nom :</strong> {{ agent.lastName }}</p>
+                            <p class="card-text"><strong>Date de naissance :</strong> {{ agent.dateOfBirth ? agent.dateOfBirth|date('y-m-d') : '' }}</p>
+                            <p class="card-text"><strong>Nom de code :</strong> {{ agent.identificationCode }}</p>
+                            <p class="card-text"><strong>Nationalité :</strong> {{ agent.nationality }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="card-text"><strong>Spécialtée :</strong> {{ agent.specialties }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center m-3">
+                    <a class="btn btn-primary m-2" href="{{ path('app_agents_show', {'id': agent.id}) }}">Voir</a>
+                    <a class="btn btn-secondary m-2" href="{{ path('app_agents_edit', {'id': agent.id}) }}">Éditer</a>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="8">Aucune donnée n'a été trouvée</td>
-            </tr>
+            <div class="alert alert-info" role="alert">
+                Aucune donnée n'a été trouvée.
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
     <a class="btn btn-primary" href="{{ path('app_agents_new') }}">Ajouter un Agent</a>
 {% endblock %}

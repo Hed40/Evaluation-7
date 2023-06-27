@@ -85,21 +85,38 @@ body {
     flex-direction: row;
 }
 /*Statut des missions*/
-.status-pending {
+.statut-pending {
     background-color: orange;
     color: white;
+    border-radius: 3px;
 }
 
-.status-in-progress {
-    color: blue;
+.statut-in-progress {
+    background-color: blue;
+    color: white;
+    border-radius: 3px;
 }
 
-.status-completed {
-    color: green;
+.statut-completed {
+    background-color: green;
+    color: white;
+    border-radius: 3px;
 }
 
-.status-deleted {
+.statut-deleted {
+    background-color: red;
+    color: white;
+    border-radius: 3px;
+}
+
+.custom-login-link {
+    font-weight: bold;
     color: red;
+}
+
+dl, ol, ul {
+    margin-top: none;
+    margin-bottom: 1rem;
 }
 
 

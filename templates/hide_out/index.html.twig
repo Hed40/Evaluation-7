@@ -5,35 +5,35 @@
 {% block content %}
     <h1>Planques</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>Country</th>
-                <th>Type</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for hide_out in hide_outs %}
-            <tr>
-                <td>{{ hide_out.id }}</td>
-                <td>{{ hide_out.code }}</td>
-                <td>{{ hide_out.country }}</td>
-                <td>{{ hide_out.type }}</td>
-                <td>
-                    <a class="btn btn-primary" href="{{ path('app_hide_out_show', {'id': hide_out.id}) }}">voire</a>
-                    <a class="btn btn-primary" href="{{ path('app_hide_out_edit', {'id': hide_out.id}) }}">éditer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Aucune donnée n'a été trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+  <div class="missionsSection" id="missionsSection">
+    {% for hide_out in hide_outs %}
+        <div class="form-container">
+            <div class="card-header">
+                <h5 class="card-title text-center">{{ hide_out.type }}</h5>
+            </div>
+            <div class="card-body mt-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-text"><strong>Code :</strong> {{ hide_out.code }}</p>
+                        <p class="card-text"><strong>Pays :</strong> {{ hide_out.country }}</p>
+                    </div>
+                                        <div class="col-md-6">
+                        <p class="card-text"><strong>Type de planque:</strong> {{ hide_out.type }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center m-3">
+                <a class="btn btn-primary m-2" href="{{ path('app_hide_out_show', {'id': hide_out.id}) }}">Voir</a>
+                <a class="btn btn-secondary m-2" href="{{ path('app_hide_out_edit', {'id': hide_out.id}) }}">Éditer</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Aucune donnée n'a été trouvée.
+        </div>
+    {% endfor %}
+</div>
 
-    <a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
+<a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
+
 {% endblock %}

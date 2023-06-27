@@ -35,7 +35,7 @@ class Missions
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?string $statut = null;
 
     #[ORM\Column(length: 255)]
     private ?string $requiredSpeciality = null;
@@ -130,14 +130,14 @@ class Missions
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatut(): ?string
     {
-        return $this->status;
+        return $this->statut;
     }
 
-    public function setStatus(string $status): static
+    public function setStatut(string $statut): static
     {
-        $this->status = $status;
+        $this->statut = $statut;
 
         return $this;
     }

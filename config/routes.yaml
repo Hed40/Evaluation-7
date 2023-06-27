@@ -12,11 +12,14 @@ app_login:
     path: /login
     controller: App\Controller\SecurityController::login
 
-app_missions_by_status:
-    path: /missions/{status}
-    controller: App\Controller\MissionsController::getMissionsByStatus
+app_missions_by_statut:
+    path: /missions/{statut}
+    controller: App\Controller\MissionsController::getMissionsByStatut
     methods: [GET]
 
-
+app_missions_new:
+    path: /missions/new
+    controller: App\Controller\MissionsController::new
+    methods: [GET]
 
 #Page par defaut

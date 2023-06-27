@@ -51,7 +51,7 @@ class MissionsType extends AbstractType
                 'label' => 'Spécialité requise'
             ])
 
-            ->add('status', ChoiceType::class, [
+            ->add('statut', ChoiceType::class, [
                 'label' => 'Statut de la mission',
                 'choices' => [
                     'En cours' => 'En cours',

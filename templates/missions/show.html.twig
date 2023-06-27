@@ -42,8 +42,8 @@
 					</td>
             </tr>
             <tr>
-                <th>Status</th>
-                <td>{{ mission.status }}</td>
+                <th>Statut</th>
+                <td>{{ mission.statut }}</td>
             </tr>
             <tr>
                 <th>RequiredSpeciality</th>
@@ -52,7 +52,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_missions_index') }}">back to list</a>
+    <a href="{{ path('app_missions_index') }}">Retour</a>
 
     <a href="{{ path('app_missions_edit', {'id': mission.id}) }}">edit</a>
 

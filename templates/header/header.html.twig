@@ -1,34 +1,44 @@
-<header>
-<nav>
+
+    <header>
+      <nav>
         <h1>RGB Management</h1>
-    <!-- Ajoutez votre barre de navigation ici -->
-    <ul>
-    {% if not is_granted('ROLE_ADMIN') %}
-        <li class="nav-item dropdown">
-    <a class="btn btn-primary dropdown-toggle" href="#" id="missionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Consulter les missions
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="missionsDropdown">
-<li><a class="dropdown-item" href="{{ path('app_missions_by_status', {'status': 'En cours'}) }}" data-status="En cours">Mission en cours</a></li>
-<li><a class="dropdown-item" href="{{ path('app_missions_by_status', {'status': 'En attente'}) }}" data-status="En attente">Mission En attente</a></li>
-<li><a class="dropdown-item" href="{{ path('app_missions_by_status', {'status': 'Terminée'}) }}" data-status="Terminée">Mission Terminées</a></li>
-<li><a class="dropdown-item" href="{{ path('app_missions_by_status', {'status': 'Annulée'}) }}" data-status="Annulée">Mission Annulées</a></li>
-
-    </ul>
-</li>
-
-        <li><a class="btn btn-primary" href="{{ path('app_login') }}">Connexion</a></li>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') %}
-        <li><a class="btn btn-primary" href="{{ path('app_missions_index') }}">Missions</a></li>
-        <li><a class="btn btn-primary" href="{{ path('app_agents_index') }}">Agents</a></li>
-        <li><a class="btn btn-primary" href="{{ path('app_contacts_index') }}">Contactes</a></li>
-        <li><a class="btn btn-primary" href="{{ path('app_targets_index') }}">Cibles</a></li>
-        <li><a class="btn btn-primary" href="{{ path('app_hide_out_index') }}">Planques</a></li>
-        <li><a class="btn btn-primary" href="{{ path('app_logout') }}">Deconnexion</a></li>
-        {% endif %}
-        <!-- Ajoutez d'autres liens de navigation si nécessaire -->
-    </ul>
-</nav>
-</header>
-
+        <ul>
+          {% if not is_granted('ROLE_USER') %}
+            {% if app.request.attributes.get('_route') != 'app_login' %}
+              <li class="nav-item dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="{{ path('app_home')}}" id="missionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Consulter les missions
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="missionsDropdown">
+                  <li>
+                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'En cours'}) }}" data-statut="En cours">Mission en cours</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'En attente'}) }}" data-statut="En attente">Mission En attente</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'Terminée'}) }}" data-statut="Terminée">Mission Terminées</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'Annulée'}) }}" data-statut="Annulée">Mission Annulées</a>
+                  </li>
+                  <li>
+                    <a class="custom-login-link btn btn-primary d-flex justify-content-center" href="{{ path('app_login') }}">Se connecter</a>
+                  </li>
+                </ul>
+              </li>
+            {% endif %}
+          {% endif %}
+          {% if is_granted('ROLE_ADMIN') %}
+            <li><a class="btn btn-primary" href="{{ path('app_missions_index') }}">Missions</a></li>
+            <li><a class="btn btn-primary" href="{{ path('app_agents_index') }}">Agents</a></li>
+            <li><a class="btn btn-primary" href="{{ path('app_contacts_index') }}">Contacts</a></li>
+            <li><a class="btn btn-primary" href="{{ path('app_targets_index') }}">Cibles</a></li>
+            <li><a class="btn btn-primary" href="{{ path('app_hide_out_index') }}">Planques</a></li>
+            <li><a class="btn btn-primary" href="{{ path('app_logout') }}">Déconnexion</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+  </div>
+</div>
