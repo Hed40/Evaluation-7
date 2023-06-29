@@ -52,6 +52,15 @@
 									{% endif %}
 								{% endfor %}
 							</p>
+														<p class="card-text">
+								<strong>Cible :</strong>
+								{% for target in mission.targets %}
+									{{ target.firstName }}
+									{{ target.lastName }}
+									{% if not loop.last %},
+									{% endif %}
+								{% endfor %}
+							</p>
 							<p class="card-text
 																{% if mission.statut == 'En attente' %}statut-pending
 																{% elseif mission.statut == 'En cours' %} statut-in-progress

@@ -6,6 +6,7 @@ use App\Entity\Missions;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Agents;
 use App\Entity\Contacts;
+use App\Entity\Targets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,6 +16,7 @@ class MissionsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
         $builder
             ->add('title', null, [
                 'label' => 'Titre de la mission'
@@ -45,10 +47,7 @@ class MissionsType extends AbstractType
                 'class' => Contacts::class,
                 'choice_label' => 'firstName',
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
-                'expanded' => True, // Fait un select dropdown
-            ])
-            ->add('requiredSpeciality', null, [
-                'label' => 'Spécialité requise'
+                'expanded' => true, // Fait un select dropdown
             ])
 
             ->add('statut', ChoiceType::class, [
@@ -60,6 +59,13 @@ class MissionsType extends AbstractType
                     'Annulée' => 'Annulée', 
                 ]
             ])
+
+            ->add('targets', EntityType::class, [
+                'class' => Targets::class,
+                'choice_label' => 'firstName',
+                'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
+                'expanded' => true, // Fait un select dropdown
+            ] )
         ;
     }
 
