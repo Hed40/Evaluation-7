@@ -5,14 +5,16 @@
 
 {% block content %}
 	<h1>Contacts</h1>
-
+<a class="btn btn-primary" href="{{ path('app_contacts_new') }}">Nouveau contact</a>
 	<div class="missionsSection" id="missionsSection">
 		{% for contact in contacts %}
 			<div class="form-container">
 				<div class="card-header">
+						<img src="{{ asset('uploads/avatars/customer-service.png') }}">
 					<h5 class="card-title text-center">{{ contact.firstName }}
 						{{ contact.lastName }}</h5>
 				</div>
+				<hr>
 				<div class="card-body mt-3">
 					<div class="row">
 						<div class="col-md-6">
@@ -36,9 +38,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="card-footer d-flex justify-content-center m-3">
-					<a class="btn btn-primary m-2" href="{{ path('app_contacts_show', {'id': contact.id}) }}">Voir</a>
-					<a class="btn btn-secondary m-2" href="{{ path('app_contacts_edit', {'id': contact.id}) }}">Éditer</a>
+				<hr>
+				<div class="card-footer d-flex align-items-center justify-content-center m-3">
+					<a class="btn btn-secondary custom-button m-2 d-flex align-items-center justify-content-center" href="{{ path('app_contacts_edit', {'id': contact.id}) }}">Éditer</a>
+					{{ include('contacts/_delete_form.html.twig') }}
 				</div>
 			</div>
 		{% else %}
@@ -47,7 +50,4 @@
 			</div>
 		{% endfor %}
 	</div>
-
-	<a class="btn btn-primary" href="{{ path('app_contacts_new') }}">Nouveau contact</a>
-
 {% endblock %}

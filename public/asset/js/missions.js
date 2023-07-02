@@ -21,6 +21,7 @@ function getMissionsByStatut(statut) {
               <div class="card-header">
                 <h5 class="card-title text-center">${mission.Titre}</h5>
               </div>
+              <hr>
               <div class="card-body mt-3">
                 <div class="row">
                   <div class="col-md-6">

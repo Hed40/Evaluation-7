@@ -21,6 +21,9 @@ class HideOutType extends AbstractType
             ->add('type', null, [
                 'label' => 'Type de planque',
             ])
+            ->add('adress', null, [
+                'label' => 'Adresse',
+            ])
         ;
     }
 

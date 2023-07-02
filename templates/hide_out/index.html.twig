@@ -4,28 +4,32 @@
 
 {% block content %}
     <h1>Planques</h1>
-
+<a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
   <div class="missionsSection" id="missionsSection">
     {% for hide_out in hide_outs %}
         <div class="form-container">
             <div class="card-header">
+            <img src="{{ asset('uploads/avatars/house.png') }}">
                 <h5 class="card-title text-center">{{ hide_out.type }}</h5>
             </div>
+            <hr>
             <div class="card-body mt-3">
                 <div class="row">
                     <div class="col-md-6">
                         <p class="card-text"><strong>Code :</strong> {{ hide_out.code }}</p>
                         <p class="card-text"><strong>Pays :</strong> {{ hide_out.country }}</p>
                     </div>
-                                        <div class="col-md-6">
+                    <div class="col-md-6">
                         <p class="card-text"><strong>Type de planque:</strong> {{ hide_out.type }}</p>
+                         <p class="card-text"><strong>Adresse :</strong> {{ hide_out.adress }}</p>
                     </div>
                 </div>
             </div>
-            <div class="card-footer d-flex justify-content-center m-3">
-                <a class="btn btn-primary m-2" href="{{ path('app_hide_out_show', {'id': hide_out.id}) }}">Voir</a>
-                <a class="btn btn-secondary m-2" href="{{ path('app_hide_out_edit', {'id': hide_out.id}) }}">Éditer</a>
-            </div>
+            <hr>
+				<div class="card-footer d-flex align-items-center justify-content-center m-3">
+					<a class="btn btn-secondary custom-button m-2 d-flex align-items-center justify-content-center" href="{{ path('app_hide_out_edit', {'id': hide_out.id}) }}">Éditer</a>
+					{{ include('hide_out/_delete_form.html.twig') }}
+				</div>
         </div>
     {% else %}
         <div class="alert alert-info" role="alert">
@@ -33,7 +37,4 @@
         </div>
     {% endfor %}
 </div>
-
-<a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
-
 {% endblock %}

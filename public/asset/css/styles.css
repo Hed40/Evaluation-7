@@ -1,122 +1,243 @@
-ul{
-    
-}
-
-body{
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
-    font-family: sans-serif;
-    text-align: center;
-}
-
-ul{
-    display: flex;
-    list-style: none;
-    justify-content: space-evenly;
-    gap: 15px;
-}
-
-table{
-    border-collapse: collapse;
-    width: 100%;
-    color: #588c7e;
-    font-family: monospace;
-    font-size: 15px;
-    text-align: center;
-}
-
-nav{
-    display:flex;
-    flex-direction: column;
-    align-items: center
-}
-
-.btn{
-    min-width: 80px;
+html {
+  background-color: lightblue;
 }
 
 body {
-    /* Juste pour la démo, changez comme vous voulez */
-    background-color: #f8f9fa;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: lightblue !important;
+}
+
+h1{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+  gap: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: #588c7e;
+  font-family: monospace;
+  font-size: 15px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  min-width: 80px;
+}
+
+body {
+  /* Juste pour la démo, changez comme vous voulez */
+  background-color: #f8f9fa;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-container {
-    background-color: #ffffff;
-    width: 90%;
-    max-width: 500px; /* Pour éviter que le formulaire ne soit trop large sur grand écran */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15); /* Ombre légère pour un effet "flottant" */
-    transition: all 0.3s ease; /* Transition pour adoucir l'effet de survol */
+  background-color: #ffffff;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px; /* Pour éviter que le formulaire ne soit trop large sur grand écran */
+  min-height: 400px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); /* Ombre légère pour un effet "flottant" */
+  transition: all 0.3s ease; /* Transition pour adoucir l'effet de survol */
 }
 
 .form-container:hover {
-    box-shadow: 0px 0px 15px 5px rgba(0,0,0,0.15); /* Ombre un peu plus prononcée au survol */
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.15); /* Ombre un peu plus prononcée au survol */
 }
 
 .form-container button {
-    /* Style de bouton basique, modifiez comme vous le souhaitez */
-    background-color: #007bff;
-    color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition pour adoucir l'effet de survol du bouton */
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition pour adoucir l'effet de survol du bouton */
 }
 
 .form-container button:hover {
-    background-color: #0056b3; /* Couleur de fond un peu plus foncée au survol */
+  background-color: #0056b3; /* Couleur de fond un peu plus foncée au survol */
 }
 
-.missionsSection{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin: 20px;
-    flex-direction: row;
+.login-container {
+  background-color: #ffffff;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px; /* Pour éviter que le formulaire ne soit trop large sur grand écran */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); /* Ombre légère pour un effet "flottant" */
+  transition: all 0.3s ease; /* Transition pour adoucir l'effet de survol */
+}
+
+.login-container:hover {
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.15); /* Ombre un peu plus prononcée au survol */
+}
+
+.login-container button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition pour adoucir l'effet de survol du bouton */
+}
+
+.login-container button:hover {
+  background-color: #0056b3; /* Couleur de fond un peu plus foncée au survol */
+}
+
+.form-edit-container {
+  background-color: #ffffff;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px; /* Pour éviter que le formulaire ne soit trop large sur grand écran */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); /* Ombre légère pour un effet "flottant" */
+  transition: all 0.3s ease; /* Transition pour adoucir l'effet de survol */
+}
+
+.form-edit-container:hover {
+  box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.15); /* Ombre un peu plus prononcée au survol */
+}
+
+.form-edit-container button {
+  background-color: #007bff;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition pour adoucir l'effet de survol du bouton */
+}
+
+.form-edit-container button:hover {
+  background-color: #0056b3; /* Couleur de fond un peu plus foncée au survol */
+}
+
+.missionsSection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+  flex-direction: row;
 }
 /*Statut des missions*/
 .statut-pending {
-    background-color: orange;
-    color: white;
-    border-radius: 3px;
+  background-color: orange;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .statut-in-progress {
-    background-color: blue;
-    color: white;
-    border-radius: 3px;
+  background-color: blue;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .statut-completed {
-    background-color: green;
-    color: white;
-    border-radius: 3px;
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .statut-deleted {
-    background-color: red;
-    color: white;
-    border-radius: 3px;
+  background-color: red;
+  color: white;
+  border-radius: 8px;
+  text-align: center;
 }
 
 .custom-login-link {
-    font-weight: bold;
-    color: red;
+  font-weight: bold;
+  color: red;
 }
 
-dl, ol, ul {
-    margin-top: none;
-    margin-bottom: 1rem;
+dl,
+ol,
+ul {
+  margin-top: none;
+  margin-bottom: 1rem;
 }
 
+.custom-button {
+  min-width: 150px;
+  height: 50px;
+}
+
+.card-header {
+    display: flex;
+  min-height: 60px;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.card-title {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.card-body {
+  display: flex;
+  min-height: 250px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-footer {
+  min-height: 50px;
+}
+
+.statut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header{
+    padding-left: 0 !important;
+}
+
+/* Ajoutez ce code dans votre fichier CSS */
+
+.card-header img {
+  width: 70px; /* Ajustez la taille en fonction de vos besoins */
+  height: 70px; /* Ajustez la taille en fonction de vos besoins */
+  border-radius: 100%; /* Rend l'image arrondie */
+  object-fit: cover; /* Assurez-vous que l'image est correctement ajustée dans le cadre */
+}
+
+.dropdown-item-text{
+  text-decoration-style: none;
+}
 

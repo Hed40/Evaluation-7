@@ -49,12 +49,15 @@ class Missions
     #[ORM\ManyToMany(targetEntity: Targets::class, inversedBy: 'Missions')]
     private Collection $Targets;
 
+    #[ORM\ManyToMany(targetEntity: HideOut::class, inversedBy: 'Missions')]
+    private Collection $HideOut;
 
     public function __construct()
     {
         $this->Contacts = new ArrayCollection();
         $this->Agents = new ArrayCollection();
         $this->Targets = new ArrayCollection();
+        $this->HideOut = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -226,6 +229,30 @@ class Missions
     public function removeTarget(Targets $target): static
     {
         $this->Targets->removeElement($target);
+
+        return $this;
+    }
+
+            /**
+     * @return Collection<int, HideOut>
+     */
+    public function getHideOut(): Collection
+    {
+        return $this->HideOut;
+    }
+
+    public function addHideOut(HideOut $hideOut): static
+    {
+        if (!$this->HideOut->contains($hideOut)) {
+            $this->HideOut->add($hideOut);
+        }
+
+        return $this;
+    }
+
+    public function removeHideOut(HideOut $hideOut): static
+    {
+        $this->HideOut->removeElement($hideOut);
 
         return $this;
     }

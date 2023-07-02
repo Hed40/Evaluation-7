@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Missions;
+use App\Validator\Constraints\UniqueNationality;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Agents;
 use App\Entity\Contacts;
@@ -38,17 +39,32 @@ class MissionsType extends AbstractType
             ])
             ->add('agents', EntityType::class, [
                 'class' => Agents::class,
-                'choice_label' => 'firstName',
+                'choice_label' => function ($agent) {
+                    return $agent->getFirstName() . ' ' . $agent->getLastName();
+                },
+
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
                 'expanded' => true, // Fait un select dropdown
             ])
             
             ->add('contacts',EntityType::class, [
                 'class' => Contacts::class,
-                'choice_label' => 'firstName',
+                'choice_label' => function ($contact) {
+                    return $contact->getFirstName() . ' ' . $contact->getLastName();
+                },
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
                 'expanded' => true, // Fait un select dropdown
             ])
+
+            ->add('targets', EntityType::class, [
+                'label' => 'Cibles de la mission',
+                'class' => Targets::class,
+                'choice_label' => function ($target) {
+                    return $target->getFirstName() . ' ' . $target->getLastName();
+                },
+                'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
+                'expanded' => true, // Fait un select dropdown
+            ] )
 
             ->add('statut', ChoiceType::class, [
                 'label' => 'Statut de la mission',
@@ -59,13 +75,6 @@ class MissionsType extends AbstractType
                     'Annulée' => 'Annulée', 
                 ]
             ])
-
-            ->add('targets', EntityType::class, [
-                'class' => Targets::class,
-                'choice_label' => 'firstName',
-                'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
-                'expanded' => true, // Fait un select dropdown
-            ] )
         ;
     }
 

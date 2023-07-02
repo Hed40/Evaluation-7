@@ -35,6 +35,8 @@ class Agents
     #[ORM\Column(length: 255)]
     private ?string $specialties = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $illustration = null;
 
     #[ORM\ManyToMany(targetEntity: Missions::class, mappedBy: 'Agents')]
     private Collection $Missions;
@@ -144,6 +146,18 @@ class Agents
         if ($this->Missions->removeElement($mission)) {
             $mission->removeAgent($this);
         }
+
+        return $this;
+    }
+
+    public function getIllustration(): ?string
+    {
+        return $this->illustration;
+    }
+
+    public function setIllustration(string $illustration): self
+    {
+        $this->illustration = $illustration;
 
         return $this;
     }

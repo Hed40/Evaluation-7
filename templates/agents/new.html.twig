@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Agents{% endblock %}
+{% block title %}Nouvel Agent{% endblock %}
 
 {% block content %}
-    <h1>Create new Agents</h1>
+    <h1>Créer un agent</h1>
 
     {{ include('agents/_form.html.twig') }}
 
-    <a href="{{ path('app_agents_index') }}">back to list</a>
+    <a href="{{ path('app_agents_index') }}">Retour</a>
 {% endblock %}

@@ -1,41 +1,58 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Agents{% endblock %}
+{% block title %}Agents
+{% endblock %}
 
 {% block content %}
-    <h1>Agents</h1>
-
-    <div class="missionsSection" id="missionsSection">
-        {% for agent in agent %}
-            <div class="form-container">
-                <div class="card-header">
-                    <h5 class="card-title text-center">{{ agent.firstName }} {{ agent.lastName }}</h5>
-                </div>
-                <div class="card-body mt-3">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p class="card-text"><strong>Prénom :</strong> {{ agent.firstName }}</p>
-                            <p class="card-text"><strong>Nom :</strong> {{ agent.lastName }}</p>
-                            <p class="card-text"><strong>Date de naissance :</strong> {{ agent.dateOfBirth ? agent.dateOfBirth|date('y-m-d') : '' }}</p>
-                            <p class="card-text"><strong>Nom de code :</strong> {{ agent.identificationCode }}</p>
-                            <p class="card-text"><strong>Nationalité :</strong> {{ agent.nationality }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="card-text"><strong>Spécialtée :</strong> {{ agent.specialties }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-center m-3">
-                    <a class="btn btn-primary m-2" href="{{ path('app_agents_show', {'id': agent.id}) }}">Voir</a>
-                    <a class="btn btn-secondary m-2" href="{{ path('app_agents_edit', {'id': agent.id}) }}">Éditer</a>
-                </div>
-            </div>
-        {% else %}
-            <div class="alert alert-info" role="alert">
-                Aucune donnée n'a été trouvée.
-            </div>
-        {% endfor %}
-    </div>
-
-    <a class="btn btn-primary" href="{{ path('app_agents_new') }}">Ajouter un Agent</a>
+	<h1>Agents</h1>
+	<a class="btn btn-primary" href="{{ path('app_agents_new') }}">Ajouter un Agent</a>
+	<div class="missionsSection" id="missionsSection">
+		{% for agents in agents %}
+			<div class="form-container">
+				<div class="card-header">
+					{% if agents.illustration is not null %}
+						<img src="{{ asset('uploads/avatars/' ~ agents.illustration) }}">
+					{% endif %}
+					<h5 class="card-title text-center">{{ agents.firstName }}
+						{{ agents.lastName }}</h5>
+				</div>
+				<hr>
+				<div class="card-body mt-3">
+					<div class="row">
+						<div class="col-md-6">
+							<p class="card-text">
+								<strong>Prénom :</strong>
+								{{ agents.firstName }}</p>
+							<p class="card-text">
+								<strong>Nom :</strong>
+								{{ agents.lastName }}</p>
+							<p class="card-text">
+								<strong>Date de naissance :</strong>
+								{{ agents.dateOfBirth ? agents.dateOfBirth|date('y-m-d') : '' }}</p>
+							<p class="card-text">
+								<strong>Nom de code :</strong>
+								{{ agents.identificationCode }}</p>
+							<p class="card-text">
+								<strong>Nationalité :</strong>
+								{{ agents.nationality }}</p>
+						</div>
+						<div class="col-md-6">
+							<p class="card-text">
+								<strong>Spécialtée :</strong>
+								{{ agents.specialties }}</p>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="card-footer d-flex align-items-center justify-content-center m-3">
+					{{ include('agents/_delete_form.html.twig') }}
+					<a class="btn btn-secondary custom-button m-2 d-flex align-items-center justify-content-center" href="{{ path('app_agents_edit', {'id': agents.id}) }}">Éditer</a>
+				</div>
+			</div>
+		{% else %}
+			<div class="alert alert-info" role="alert">
+				Aucune donnée n'a été trouvée.
+			</div>
+		{% endfor %}
+	</div>
 {% endblock %}

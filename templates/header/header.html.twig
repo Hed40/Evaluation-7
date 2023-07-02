@@ -1,44 +1,55 @@
-
-    <header>
-      <nav>
-        <h1>RGB Management</h1>
-        <ul>
+<header class="header">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="{{ path('app_home') }}">Spy Missions Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
           {% if not is_granted('ROLE_USER') %}
             {% if app.request.attributes.get('_route') != 'app_login' %}
               <li class="nav-item dropdown">
-                <a class="btn btn-primary dropdown-toggle" href="{{ path('app_home')}}" id="missionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="missionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Consulter les missions
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="missionsDropdown">
                   <li>
-                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'En cours'}) }}" data-statut="En cours">Mission en cours</a>
+                    <a class="dropdown-item user" href="{{ path('app_home_missions_by_statut', {'statut': 'En cours'}) }}" data-statut="En cours">Mission en cours</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'En attente'}) }}" data-statut="En attente">Mission En attente</a>
+                    <a class="dropdown-item user" href="{{ path('app_home_missions_by_statut', {'statut': 'En attente'}) }}" data-statut="En attente">Mission en attente</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'Terminée'}) }}" data-statut="Terminée">Mission Terminées</a>
+                    <a class="dropdown-item user" href="{{ path('app_home_missions_by_statut', {'statut': 'Terminée'}) }}" data-statut="Terminée">Mission terminée</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="{{ path('app_home_missions_by_statut', {'statut': 'Annulée'}) }}" data-statut="Annulée">Mission Annulées</a>
-                  </li>
-                  <li>
-                    <a class="custom-login-link btn btn-primary d-flex justify-content-center" href="{{ path('app_login') }}">Se connecter</a>
+                    <a class="dropdown-item user" href="{{ path('app_home_missions_by_statut', {'statut': 'Annulée'}) }}" data-statut="Annulée">Mission annulée</a>
                   </li>
                 </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
               </li>
             {% endif %}
           {% endif %}
           {% if is_granted('ROLE_ADMIN') %}
-            <li><a class="btn btn-primary" href="{{ path('app_missions_index') }}">Missions</a></li>
-            <li><a class="btn btn-primary" href="{{ path('app_agents_index') }}">Agents</a></li>
-            <li><a class="btn btn-primary" href="{{ path('app_contacts_index') }}">Contacts</a></li>
-            <li><a class="btn btn-primary" href="{{ path('app_targets_index') }}">Cibles</a></li>
-            <li><a class="btn btn-primary" href="{{ path('app_hide_out_index') }}">Planques</a></li>
-            <li><a class="btn btn-primary" href="{{ path('app_logout') }}">Déconnexion</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Administration
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                <li><a class="dropdown-item-text" href="{{ path('app_missions_index') }}">Missions</a></li>
+                <li><a class="dropdown-item-text" href="{{ path('app_agents_index') }}">Agents</a></li>
+                <li><a class="dropdown-item-text" href="{{ path('app_contacts_index') }}">Contacts</a></li>
+                <li><a class="dropdown-item-text" href="{{ path('app_targets_index') }}">Cibles</a></li>
+                <li><a class="dropdown-item-text" href="{{ path('app_hide_out_index') }}">Planques</a></li>
+                <li><a class="dropdown-item-text" href="{{ path('app_logout') }}">Déconnexion</a></li>
+              </ul>
+            </li>
           {% endif %}
         </ul>
-      </nav>
-    </header>
-  </div>
-</div>
+      </div>
+    </div>
+  </nav>
+</header>

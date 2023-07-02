@@ -1,43 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 offset-md-3"> 
-      <div class="form-container">
-        <form method="post">
-          {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-          {% endif %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="login-container">
+					<form method="post">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
 
-          {% if app.user %}
-            <div class="mb-3">
-              Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-          {% endif %}
-          <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1> <!-- Suppression de la classe text-center -->
-          <label for="inputEmail">Email</label>
-          <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-          <label for="inputPassword">Mot de passe</label>
-          <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+						{% if app.user %}
+							<div class="mb-3">
+								Vous êtes connecté en tant que
+								{{ app.user.userIdentifier }},
+								<a href="{{ path('app_logout') }}">Logout</a>
+							</div>
+						{% endif %}
+						<h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+						<!-- Suppression de la classe text-center -->
+						<label for="inputEmail">Email</label>
+						<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+						<label for="inputPassword">Mot de passe</label>
+						<input
+						type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+						<!-- exige que le mot de passe ait au moins 8 caractères, comprenne au moins une lettre et au moins un chiffre et un caractère -->
 
-          <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						{% if error %}
+							{% if error.messageKey == 'regex' %}
+								<div class="alert alert-danger">Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre, un chiffre et un caractère spécial.</div>
+							{% else %}
+								<div class="alert alert-danger">{{ error.message|trans({}, 'security') }}</div>
+							{% endif %}
+						{% endif %}
 
-          <div class="checkbox mb-3">
-            <label>
-              <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-          </div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-          <button class="btn btn-lg btn-primary" type="submit">
-            Se connecter
-          </button>
-        </form>
-      </div>
-      <div class="text-center mt-3">
-        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour</a>
-      </div>
-    </div>
-  </div>
-</div>
+						<div class="checkbox mb-3">
+							<label>
+								<input type="checkbox" name="_remember_me">
+								Se souvenir de moi
+							</label>
+						</div>
+
+						<button class="btn btn-lg btn-primary" type="submit">
+							Se connecter
+						</button>
+					</form>
+				</div>
+				<div class="text-center mt-3">
+					<a href="{{ path('app_home') }}" class="btn btn-primary">Retour</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
