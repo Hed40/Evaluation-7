@@ -55,7 +55,7 @@ class AgentsType extends AbstractType
                 ],
                 'constraints' => [
                     new File([
-                        'maxSize' => '10024k', // Limite la taille du fichier à 10024 Ko (10 Mo)
+                        'maxSize' => '52428800', // Limite la taille du fichier à 50 Mo
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
