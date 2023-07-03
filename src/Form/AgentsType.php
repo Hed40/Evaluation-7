@@ -19,6 +19,9 @@ class AgentsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('title', null, [
+            'label' => 'Ajouter un agent',
+        ])
             ->add('firstName', null, [
                 'label' => 'Prénom',
             ])
