@@ -61,12 +61,8 @@ function getMissionsByStatut(statut) {
                       ${mission.Contacts}
                     </p>
                     <p class="card-text">
-                    <strong>Spécialité requise :</strong>
-                    {% for speciality in mission.specialties %}
-                      {{ speciality.Name }}
-                      {% if not loop.last %},
-                      {% endif %}
-                    {% endfor %}
+                      <strong>Spécialité requise :</strong>
+                      ${mission.Spécialité}
                     </p>
                   </div>
                 </div>
