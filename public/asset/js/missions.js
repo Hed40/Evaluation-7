@@ -19,6 +19,7 @@ function getMissionsByStatut(statut) {
           let missionHtml = `
             <div class="form-container">
               <div class="card-header">
+				        <img class="image" src="/uploads/avatars/flag.png">
                 <h5 class="card-title text-center">${mission.Titre}</h5>
               </div>
               <hr>

@@ -33,17 +33,18 @@ class Agents
     private ?string $nationality = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $specialties = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $illustration = null;
 
     #[ORM\ManyToMany(targetEntity: Missions::class, mappedBy: 'Agents')]
     private Collection $Missions;
 
+    #[ORM\ManyToMany(targetEntity: Speciality::class, inversedBy: 'agents')]
+    private Collection $specialties;
+
     public function __construct()
     {
         $this->Missions = new ArrayCollection();
+        $this->specialties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,18 +112,6 @@ class Agents
         return $this;
     }
 
-    public function getSpecialties(): ?string
-    {
-        return $this->specialties;
-    }
-
-    public function setSpecialties(string $specialties): static
-    {
-        $this->specialties = $specialties;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Missions>
      */
@@ -158,6 +147,30 @@ class Agents
     public function setIllustration(string $illustration): self
     {
         $this->illustration = $illustration;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Speciality>
+     */
+    public function getSpecialties(): Collection
+    {
+        return $this->specialties;
+    }
+
+    public function addSpecialty(Speciality $specialty): static
+    {
+        if (!$this->specialties->contains($specialty)) {
+            $this->specialties->add($specialty);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialty(Speciality $specialty): static
+    {
+        $this->specialties->removeElement($specialty);
 
         return $this;
     }

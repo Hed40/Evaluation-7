@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Contacts</h1>
-<a class="btn btn-primary" href="{{ path('app_contacts_new') }}">Nouveau contact</a>
+<br>
+<a class="btn btn-primary custom-button-new m-2 d-flex align-items-center justify-content-center" href="{{ path('app_contacts_new') }}">Nouveau contact</a>
 	<div class="missionsSection" id="missionsSection">
 		{% for contact in contacts %}
 			<div class="form-container">
@@ -26,7 +26,7 @@
 								{{ contact.lastName }}</p>
 							<p class="card-text">
 								<strong>Date de naissance :</strong>
-								{{ contact.dateOfBirth ? contact.dateOfBirth|date('y-m-d') : '' }}</p>
+								{{ contact.dateOfBirth ? contact.dateOfBirth|date('d M Y') : '' }}</p>
 							<p class="card-text">
 								<strong>Nom de code :</strong>
 								{{ contact.codeName }}</p>

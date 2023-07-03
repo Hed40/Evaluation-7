@@ -3,17 +3,17 @@
 {% block title %}Planques{% endblock %}
 
 {% block content %}
-    <h1>Planques</h1>
-<a class="btn btn-primary" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
+<br>
+<a class="btn btn-primary custom-button-new m-2 d-flex align-items-center justify-content-center" href="{{ path('app_hide_out_new') }}">Nouvelle planque</a>
   <div class="missionsSection" id="missionsSection">
     {% for hide_out in hide_outs %}
-        <div class="form-container">
+        <div class="form-hideOut-container">
             <div class="card-header">
             <img src="{{ asset('uploads/avatars/house.png') }}">
                 <h5 class="card-title text-center">{{ hide_out.type }}</h5>
             </div>
             <hr>
-            <div class="card-body mt-3">
+            <div class="card-body hideOut mt-3">
                 <div class="row">
                     <div class="col-md-6">
                         <p class="card-text"><strong>Code :</strong> {{ hide_out.code }}</p>

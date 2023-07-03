@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Agents;
+use App\Entity\Speciality;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,14 +35,21 @@ class AgentsType extends AbstractType
             ->add('nationality', null, [
                 'label' =>'Nationalité',
             ])
-            ->add('specialties', null, [
-                'label' => 'Spécialités',
-            ])
+            ->add('specialties', EntityType::class, [
+                'label' => 'Spécialités requises pour la mission',
+                'class' => Speciality::class,
+                'choice_label' => function ($specialties) {
+                    return $specialties->getName() . ' ' ;
+                },
+                'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
+                'expanded' => false, // Fait un select dropdown
+            ] )
+
             ->add('illustration', FileType::class, [
                 'label' => 'Illustration',
                 'required' => true,
                 'mapped' => true,
-                'data_class' => null, // Ajouter cette option pour pouvoir récupérer l'illustration actuelle
+                'data_class' => null, // Permet de ne pas avoir d'erreur à l'envoi du formulaire
                 'attr' => [
                     'accept' => 'image/png, image/jpeg, image/jpg, image/gif',
                 ],

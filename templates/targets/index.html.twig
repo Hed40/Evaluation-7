@@ -3,8 +3,8 @@
 {% block title %}Cibles{% endblock %}
 
 {% block content %}
-    <h1>Cibles</h1>
-<a class="btn btn-primary" href="{{ path('app_targets_new') }}">Nouvelle cible</a>
+<br>
+<a class="btn btn-primary custom-button-new m-2 d-flex align-items-center justify-content-center" href="{{ path('app_targets_new') }}">Nouvelle cible</a>
    <div class="missionsSection" id="missionsSection">
     {% for target in targets %}
         <div class="form-container">
@@ -16,13 +16,13 @@
             <div class="card-body mt-3">
                 <div class="row">
                     <div class="col-md-6">
-                        <p class="card-text"><strong>FirstName :</strong> {{ target.firstName }}</p>
-                        <p class="card-text"><strong>LastName :</strong> {{ target.lastName }}</p>
-                        <p class="card-text"><strong>DateOfBirth :</strong> {{ target.dateOfBirth ? target.dateOfBirth|date('Y-m-d') : '' }}</p>
-                        <p class="card-text"><strong>CodeName :</strong> {{ target.codeName }}</p>
+                        <p class="card-text"><strong>Prénom :</strong> {{ target.firstName }}</p>
+                        <p class="card-text"><strong>Nom :</strong> {{ target.lastName }}</p>
+                        <p class="card-text"><strong>Date de naissance :</strong> {{ target.dateOfBirth ? target.dateOfBirth|date('d M Y') : '' }}</p>
+                        <p class="card-text"><strong>Nom de code :</strong> {{ target.codeName }}</p>
                     </div>
                     <div class="col-md-6">
-                    <p class="card-text"><strong>Nationality :</strong> {{ target.nationality }}</p>
+                    <p class="card-text"><strong>Nationalité :</strong> {{ target.nationality }}</p>
                     </div>
                 </div>
             </div>

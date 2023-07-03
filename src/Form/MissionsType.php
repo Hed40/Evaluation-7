@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Missions;
-use App\Validator\Constraints\UniqueNationality;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Agents;
 use App\Entity\Contacts;
+use App\Entity\Speciality;
 use App\Entity\Targets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,7 +44,7 @@ class MissionsType extends AbstractType
                 },
 
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
-                'expanded' => true, // Fait un select dropdown
+                'expanded' => false, // Fait un select dropdown
             ])
             
             ->add('contacts',EntityType::class, [
@@ -53,7 +53,7 @@ class MissionsType extends AbstractType
                     return $contact->getFirstName() . ' ' . $contact->getLastName();
                 },
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
-                'expanded' => true, // Fait un select dropdown
+                'expanded' => false, // Fait un select dropdown
             ])
 
             ->add('targets', EntityType::class, [
@@ -63,7 +63,17 @@ class MissionsType extends AbstractType
                     return $target->getFirstName() . ' ' . $target->getLastName();
                 },
                 'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
-                'expanded' => true, // Fait un select dropdown
+                'expanded' => false, // Fait un select dropdown
+            ] )
+
+            ->add('specialties', EntityType::class, [
+                'label' => 'Spécialités requises pour la mission',
+                'class' => Speciality::class,
+                'choice_label' => function ($specialties) {
+                    return $specialties->getName() . ' ' ;
+                },
+                'multiple' => true, // Ou toute autre propriété de l'entité Agent qui doit être affichée
+                'expanded' => false, // Fait un select dropdown
             ] )
 
             ->add('statut', ChoiceType::class, [

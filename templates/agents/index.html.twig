@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Agents</h1>
-	<a class="btn btn-primary" href="{{ path('app_agents_new') }}">Ajouter un Agent</a>
+<br>
+	<a class="btn btn-primary custom-button-new m-2 d-flex align-items-center justify-content-center" href="{{ path('app_agents_new') }}">Nouvel agent</a>
 	<div class="missionsSection" id="missionsSection">
 		{% for agents in agents %}
 			<div class="form-container">
@@ -28,7 +28,7 @@
 								{{ agents.lastName }}</p>
 							<p class="card-text">
 								<strong>Date de naissance :</strong>
-								{{ agents.dateOfBirth ? agents.dateOfBirth|date('y-m-d') : '' }}</p>
+								{{ agents.dateOfBirth ? agents.dateOfBirth|date('d M Y') : '' }}</p>
 							<p class="card-text">
 								<strong>Nom de code :</strong>
 								{{ agents.identificationCode }}</p>
@@ -38,15 +38,21 @@
 						</div>
 						<div class="col-md-6">
 							<p class="card-text">
-								<strong>Spécialtée :</strong>
-								{{ agents.specialties }}</p>
+							<strong>Spécialité requise :</strong>
+								{% for speciality in agents.specialties %}
+									{{ speciality.Name }}
+									{% if not loop.last %},
+									{% endif %}
+								{% endfor %}
+							</p>
+							
 						</div>
 					</div>
 				</div>
 				<hr>
 				<div class="card-footer d-flex align-items-center justify-content-center m-3">
-					{{ include('agents/_delete_form.html.twig') }}
 					<a class="btn btn-secondary custom-button m-2 d-flex align-items-center justify-content-center" href="{{ path('app_agents_edit', {'id': agents.id}) }}">Éditer</a>
+					{{ include('agents/_delete_form.html.twig') }}
 				</div>
 			</div>
 		{% else %}

@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: MissionsRepository::class)]
 class Missions
@@ -52,12 +54,16 @@ class Missions
     #[ORM\ManyToMany(targetEntity: HideOut::class, inversedBy: 'Missions')]
     private Collection $HideOut;
 
+    #[ORM\ManyToMany(targetEntity: Speciality::class, inversedBy: 'Missions')]
+    private Collection $specialties;
+
     public function __construct()
     {
         $this->Contacts = new ArrayCollection();
         $this->Agents = new ArrayCollection();
         $this->Targets = new ArrayCollection();
         $this->HideOut = new ArrayCollection();
+        $this->specialties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +259,111 @@ class Missions
     public function removeHideOut(HideOut $hideOut): static
     {
         $this->HideOut->removeElement($hideOut);
+
+        return $this;
+    }
+
+        /**
+     * @Assert\Callback
+     */
+    public function validateAgentsAndTargets(ExecutionContextInterface $context)
+    {
+        $agentNationalities = [];
+        $targetNationalities = [];
+
+        foreach ($this->Agents as $agent) {
+            $nationality = $agent->getNationality();
+            if (in_array($nationality, $targetNationalities)) {
+                $context->buildViolation('Agents and targets cannot have the same nationality.')
+                    ->atPath('agents')
+                    ->addViolation();
+                break;
+            }
+            $agentNationalities[] = $nationality;
+        }
+
+        foreach ($this->Targets as $target) {
+            $nationality = $target->getNationality();
+            if (in_array($nationality, $agentNationalities)) {
+                $context->buildViolation('Agents and targets cannot have the same nationality.')
+                    ->atPath('targets')
+                    ->addViolation();
+                break;
+            }
+            $targetNationalities[] = $nationality;
+        }
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateContacts(ExecutionContextInterface $context)
+    {
+        $missionCountry = $this->getCountry();
+        foreach ($this->Contacts as $contact) {
+            $contactNationality = $contact->getNationality();
+            if ($contactNationality !== $missionCountry) {
+                $context->buildViolation('Contacts must have the same nationality as the mission country.')
+                    ->atPath('contacts')
+                    ->addViolation();
+                break;
+            }
+        }
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateHideOut(ExecutionContextInterface $context)
+    {
+        $missionCountry = $this->getCountry();
+        foreach ($this->HideOut as $hideout) {
+            $hideoutCountry = $hideout->getCountry();
+            if ($hideoutCountry !== $missionCountry) {
+                $context->buildViolation('The hideout must be in the same country as the mission.')
+                    ->atPath('hideOut')
+                    ->addViolation();
+                break;
+            }
+        }
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validateSpeciality(ExecutionContextInterface $context)
+    {
+        $requiredSpeciality = $this->getRequiredSpeciality();
+        foreach ($this->Agents as $agent) {
+            if ($agent->getSpeciality() === $requiredSpeciality) {
+                return;
+            }
+        }
+        $context->buildViolation('At least one agent must have the required speciality.')
+            ->atPath('agents')
+            ->addViolation();
+    }
+
+    /**
+     * @return Collection<int, Speciality>
+     */
+    public function getSpecialties(): Collection
+    {
+        return $this->specialties;
+    }
+
+    public function addSpecialty(Speciality $specialty): static
+    {
+        if (!$this->specialties->contains($specialty)) {
+            $this->specialties->add($specialty);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialty(Speciality $specialty): static
+    {
+        $this->specialties->removeElement($specialty);
 
         return $this;
     }

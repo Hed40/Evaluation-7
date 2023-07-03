@@ -4,13 +4,13 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Missions</h1>
-	<a class="btn btn-primary" href="{{ path('app_missions_creat_new') }}">Nouvelle mission</a>
+<br>
+	<a class="btn btn-primary custom-button-new m-2 d-flex align-items-center justify-content-center" href="{{ path('app_missions_creat_new') }}">Nouvelle mission</a>
 	<div class="missionsSection" id="missionsSection">
 		{% for mission in missions %}
 			<div class="form-container">
 				<div class="card-header">
-				<img src="{{ asset('uploads/avatars/flag.png') }}">
+					<img src="{{ asset('uploads/avatars/flag.png') }}">
 					<h5 class="card-title text-center">{{ mission.title }}</h5>
 				</div>
 				<hr>
@@ -60,16 +60,23 @@
 									{% endif %}
 								{% endfor %}
 							</p>
-							<p class="card-text ">
+							<p class="card-text">
 								<strong>Spécialité requise :</strong>
-								{{ mission.requiredSpeciality }}</p>
+								{% for speciality in mission.specialties %}
+									{{ speciality.Name }}
+									{% if not loop.last %},
+									{% endif %}
+								{% endfor %}
+							</p>
 							<p class="card-text
-								{% if mission.statut == 'En attente' %}statut-pending
-								{% elseif mission.statut == 'En cours' %} statut-in-progress
-								{% elseif mission.statut == 'Terminée' %} statut-completed
-								{% elseif mission.statut == 'Annulée' %} statut-deleted
-								{% endif %}">
-								<strong>Statut : </strong>{{ mission.statut }}</p>
+																	{% if mission.statut == 'En attente' %}statut-pending
+																	{% elseif mission.statut == 'En cours' %} statut-in-progress
+																	{% elseif mission.statut == 'Terminée' %} statut-completed
+																	{% elseif mission.statut == 'Annulée' %} statut-deleted
+																	{% endif %}">
+								<strong>Statut :
+								</strong>
+								{{ mission.statut }}</p>
 						</div>
 					</div>
 				</div>

@@ -18,11 +18,15 @@ class Speciality
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\ManyToMany(targetEntity: Missions::class, mappedBy: 'specialties')]
+    private Collection $missions;
+
     #[ORM\ManyToMany(targetEntity: Agents::class, mappedBy: 'specialties')]
     private Collection $agents;
 
     public function __construct()
     {
+        $this->missions = new ArrayCollection();
         $this->agents = new ArrayCollection();
     }
 
@@ -39,6 +43,33 @@ class Speciality
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Missions>
+     */
+    public function getMissions(): Collection
+    {
+        return $this->missions;
+    }
+
+    public function addMission(Missions $mission): static
+    {
+        if (!$this->missions->contains($mission)) {
+            $this->missions->add($mission);
+            $mission->addSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMission(Missions $mission): static
+    {
+        if ($this->missions->removeElement($mission)) {
+            $mission->removeSpecialty($this);
+        }
 
         return $this;
     }
