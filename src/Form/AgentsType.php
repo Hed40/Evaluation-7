@@ -75,6 +75,7 @@ class AgentsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Agents::class,
+            'label' => 'Formulaire d\'agents', // Titre du formulaire
             'current_illustration' => null, // Ajouter cette option pour pouvoir récupérer l'illustration actuelle
         ]);
     }
